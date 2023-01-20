@@ -8,8 +8,8 @@ public class PlayerHealth : MonoBehaviour
 {
     public Slider slider;
     public int currentHealth;
-    int maxHealth = 100;
-
+    int _maxHealth = 100;
+    
     public void SetMaxHealth(int health)
     {
         slider.maxValue = health;
@@ -20,16 +20,6 @@ public class PlayerHealth : MonoBehaviour
     {
         slider.value = health;
     }
-    public void HealDamage(int healingAmount)
-    {
-        currentHealth += healingAmount;
-        SetHealth(currentHealth);
-
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-    }
 
     public void TakeDamage(int damageAmount)
     {
@@ -38,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(5);
         }
     }
 }

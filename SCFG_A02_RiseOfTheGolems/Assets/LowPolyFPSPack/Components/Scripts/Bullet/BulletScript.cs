@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
 
 // ----- Low Poly FPS Pack Free Version -----
 public class BulletScript : MonoBehaviour {
@@ -17,8 +18,14 @@ public class BulletScript : MonoBehaviour {
 	[Header("Impact Effect Prefabs")]
 	public Transform [] metalImpactPrefabs;
 
-	private void Start () 
-	{
+	private TMP_Text _scoreText;
+	int _scoreCount;
+	public int currentHealth;
+
+	private void Start ()
+	{ 
+		_scoreCount = 0;
+		_scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<TMP_Text>();
 		//Start destroy timer
 		StartCoroutine (DestroyAfter ());
 	}
@@ -67,6 +74,18 @@ public class BulletScript : MonoBehaviour {
 				<ExplosiveBarrelScript>().explode = true;
 			//Destroy bullet object
 			Destroy(gameObject);
+		}
+		
+		if(collision.gameObject.tag == "Enemy")
+		{
+			_scoreCount+=1;
+			_scoreText.text = _scoreCount.ToString();
+			Destroy(collision.gameObject);
+		}
+
+		if(collision.transform.tag == "Boss_Enemy")
+		{
+			collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(5);
 		}
 	}
 

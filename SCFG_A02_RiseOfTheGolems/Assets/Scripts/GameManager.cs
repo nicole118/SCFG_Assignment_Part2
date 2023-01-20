@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject pauseMenu;
-
+    public int sceneNumber;
     private void Update()
     {
         PauseGame();
@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
 
     void PauseGame()
     {
-
         if (Input.GetKeyDown(KeyCode.P))
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
@@ -27,6 +26,20 @@ public class GameManager : MonoBehaviour
             else
                 Time.timeScale = 1;
         }
+    }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void GoToLevel()
+    {
+        SceneManager.LoadScene(sceneNumber);
     }
 }

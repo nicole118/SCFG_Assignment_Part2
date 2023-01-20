@@ -71,14 +71,14 @@ namespace FPSControllerLPFP
         private readonly RaycastHit[] _wallCastResults = new RaycastHit[8];
 
         public PlayerHealth healthBar;
-        private int maxHealth = 100;
         public int currentHealth;
+        private int _maxHealth = 100;
 
         /// Initializes the FpsController on start.
         private void Start()
         {
-            currentHealth = maxHealth;
-            healthBar.SetMaxHealth(maxHealth);
+            currentHealth = _maxHealth;
+            healthBar.SetMaxHealth(_maxHealth);
 
             _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
@@ -94,7 +94,7 @@ namespace FPSControllerLPFP
             Cursor.lockState = CursorLockMode.Locked;
             ValidateRotationRestriction();
         }
-
+        
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.tag == "Enemy")
@@ -107,10 +107,9 @@ namespace FPSControllerLPFP
             }
             else if (collision.gameObject.tag == "Portal")
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(4);
             }
         }
-
         private Transform AssignCharactersCamera()
         {
             var t = transform;
